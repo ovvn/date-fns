@@ -1,4 +1,5 @@
 import addLeadingZeros from '../../addLeadingZeros/index.js'
+import buildLocalizeFn from '../../../locale/_lib/buildLocalizeFn/index.js'
 
 /*
  * |     | Unit                           |     | Unit                           |
@@ -45,6 +46,18 @@ import addLeadingZeros from '../../addLeadingZeros/index.js'
  * - `p` is long localized time format
  */
 
+var monthValues = {
+  abbreviated: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+  wide: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+}
+
+var localize = {
+  month: buildLocalizeFn({
+    values: monthValues,
+    defaultWidth: 'wide'
+  })
+}
+
 var formatters = {
   // Year
   y: function(date, token) {
@@ -66,7 +79,23 @@ var formatters = {
   // Month
   M: function(date, token) {
     var month = date.getUTCMonth()
-    return token === 'M' ? String(month + 1) : addLeadingZeros(month + 1, 2)
+
+    switch (token) {
+      case 'M':
+        return String(month + 1)
+      case 'MM':
+        return addLeadingZeros(month + 1, 2)
+      // Jan, Feb, ..., Dec
+      case 'MMM':
+        return localize.month(month, {
+          width: 'abbreviated',
+          context: 'formatting'
+        })
+      // January, February, ..., December
+      case 'MMMM':
+      default:
+        return localize.month(month, { width: 'wide', context: 'formatting' })
+    }
   },
 
   // Day of the month

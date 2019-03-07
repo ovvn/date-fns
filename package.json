@@ -1,6 +1,6 @@
 {
   "name": "date-fns",
-  "version": "DON'T CHANGE; IT'S SET AUTOMATICALLY DURING DEPLOYMENT; ALSO, USE YARN FOR DEVELOPMENT",
+  "version": "2.0.0-alpha.27",
   "sideEffects": false,
   "contributors": [
     "Sasha Koss <koss@nocorp.me>",
@@ -37,7 +37,9 @@
     "singleQuote": true,
     "semi": false
   },
-  "dependencies": {},
+  "dependencies": {
+    "date-fns": "file:.yalc/date-fns"
+  },
   "devDependencies": {
     "babel": "^6.5.2",
     "babel-cli": "^6.6.5",

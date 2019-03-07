@@ -1,0 +1,9 @@
+{
+  "version": "v1",
+  "packages": {
+    "date-fns": {
+      "signature": "a24eb7384100742d1300e347f7b9b33d",
+      "file": true
+    }
+  }
+}
